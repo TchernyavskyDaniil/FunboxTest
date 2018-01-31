@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import RoutesEditor from './routes_editor_component';
+import PointsEditor from './routes_editor_component';
+import RoutesMap from './map_component';
 
 export default class Level2Component extends React.Component {
   render () {
@@ -10,7 +11,8 @@ export default class Level2Component extends React.Component {
         <Link to="/" className="level-two__back link-button">Назад на главную</Link>
         <article>
           <h2>Редактор маршрутов</h2>
-          <RoutesEditor/>
+          <PointsEditor/>
+          <RoutesMap/>
         </article>
       </section>
     );

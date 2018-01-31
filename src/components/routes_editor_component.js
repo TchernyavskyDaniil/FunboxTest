@@ -1,28 +1,47 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {addNewPoint} from '../actions/index';
+import {clearPoints} from '../actions/index';
+import {removePoint} from '../actions/index';
 
-class RoutesEditor extends React.Component {
+const ENTER_KEYCODE = 13;
+
+class PointsEditor extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {pointTitle: ''};
+  }
+
   renderPoints () {
-    return this.props.pointsList.map((point) => {
-      return <li key={point.id}>{point.title}</li>;
+    return Object.values(this.props.pointsList).map((point) => {
+      return (
+        <li key={point.id}>
+          {point.title}
+          <button onClick={() => this.props.removePoint(point.id)}>X</button>
+        </li>);
     });
   }
 
-  buttonClickHandler () {
-    const pointId = this.props.pointsList.length + 1;
-    const newPoint = {
-      id: pointId,
-      title: `Точка маршрута ${pointId}`
-    };
+  inputKeydownHandler (event) {
+    if (event.keyCode === ENTER_KEYCODE && this.state.pointTitle !== '') {
+      const id = Object.keys(this.props.pointsList).length + 1;
+      const title = this.state.pointTitle;
+      const newPoint = {id, title};
 
-    this.props.addNewPoint(newPoint);
+      this.props.addNewPoint(newPoint);
+      this.setState({pointTitle: ''});
+    }
   }
 
   render () {
     return (
       <div>
-        <button onClick={this.buttonClickHandler.bind(this)}>Добавить точку</button>
+        <input type="text" placeholder="Введите название точки" value={this.state.pointTitle}
+          onKeyDown={this.inputKeydownHandler.bind(this)}
+          onChange={(event) => this.setState({pointTitle: event.target.value})}/>
+
+        <button onClick={() => this.props.clearPoints()}>Сбросить все точки</button>
         <ul>
           {this.renderPoints()}
         </ul>
@@ -37,4 +56,4 @@ const mapStateToProps = function (state) {
   };
 };
 
-export default connect(mapStateToProps, {addNewPoint})(RoutesEditor);
+export default connect(mapStateToProps, {addNewPoint, clearPoints, removePoint})(PointsEditor);
