@@ -6,7 +6,7 @@ export default class Level1Component extends React.Component {
     return (
       <section className="level-one">
         <h1 className="level-one__title">Level I</h1>
-        <Link to="/funboxtest" className="level-one__back link-button link-button--lev-1">Назад на главную</Link>
+        <Link to="/FunboxTest" className="level-one__back link-button link-button--lev-1">Назад на главную</Link>
 
         <article className="level-one__card card">
           <div className="card__question-container">
