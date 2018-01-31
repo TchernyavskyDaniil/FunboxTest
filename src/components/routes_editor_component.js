@@ -16,9 +16,9 @@ class PointsEditor extends React.Component {
   renderPoints () {
     return Object.values(this.props.pointsList).map((point) => {
       return (
-        <li key={point.id}>
+        <li key={point.id} className="routes__point">
           {point.title}
-          <button onClick={() => this.props.removePoint(point.id)}>X</button>
+          <button onClick={() => this.props.removePoint(point.id)}>Удалить</button>
         </li>);
     });
   }
@@ -36,13 +36,17 @@ class PointsEditor extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="routes__points-editor">
         <input type="text" placeholder="Введите название точки" value={this.state.pointTitle}
           onKeyDown={this.inputKeydownHandler.bind(this)}
-          onChange={(event) => this.setState({pointTitle: event.target.value})}/>
+          onChange={(event) => this.setState({pointTitle: event.target.value})}
+          className="routes__input"
+        />
 
-        <button onClick={() => this.props.clearPoints()}>Сбросить все точки</button>
-        <ul>
+        <button onClick={() => this.props.clearPoints()} className="routes__clear link-button link-button--lev-2">
+          Сбросить все точки
+        </button>
+        <ul className="routes__points-list">
           {this.renderPoints()}
         </ul>
       </div>

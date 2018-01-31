@@ -5,8 +5,8 @@ export default class Level1Component extends React.Component {
   render () {
     return (
       <section className="level-one">
-        <h1 className="level-one__header">Level I</h1>
-        <Link to="/" className="level-one__back link-button">Назад на главную</Link>
+        <h1 className="level-one__title">Level I</h1>
+        <Link to="/" className="level-one__back link-button link-button--lev-1">Назад на главную</Link>
 
         <article className="level-one__card card">
           <div className="card__question-container">
@@ -52,69 +52,69 @@ export default class Level1Component extends React.Component {
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Опишите основные особенности разработки крупных многостраничных сайтов,
             функциональность которых может меняться в процессе реализации и поддержки.
             Расскажите о своем опыте работы над подобными сайтами: какие подходы,
             инструменты и технологии вы применяли на практике, с какими проблемами
             сталкивались и как их решали.
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               При разработке крупных сайтов лучше всего использовать модульную структуру. Т.е. необходимо исключить
               воздействие одного модуля (компонента, блока) на внутренности другого модуля (блока). Иначе при
               перестановке или замене составляющих элементов сайта начинается массовая переделка из-за плывущей вёрстки.
               С задачей модульности хорошо справляется БЭМ методология. БЭМ избавляет от проблем хрупкой вложенности
               css-селекторов, опоры на теги при стилизации, задает namespace для более удобной поддержки приложения.
             </p>
-            <p>
+            <p className="card__answer">
               Использование препроцессоров также позволяет внедрять переменные в стилизацию (и многое другое), что
               позволяет легко и быстро менять основные цвета при изменении дизайна.
             </p>
-            <p>
+            <p className="card__answer">
               В работе над вёрсткой я как раз использую БЭМ и SCSS, что позволяет упростить процесс разработки и
               дальнейшей поддержки проекта.
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             При разработке интерфейсов с использованием компонентной архитектуры часто
             используются термины Presentational Сomponents и Сontainer Сomponents. Что
             означают данные термины? Зачем нужно такое разделение, какие у него есть
             плюсы и минусы?
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Если говорить о React, то Presentational Сomponents отвечают исключительно за view-составляющую компонента
               и той части приложения, которую они представляют. Т.е. Presentational Сomponents не контактируют с
               глобальным хранилищем состояний
             </p>
-            <p>
+            <p className="card__answer">
               Сontainer Сomponents в свою очередь контактируют с хранилищем состояний через React-Redux и передают
               нужные части состояния своим потомкам-компонентам. Это позволяет снизить число общих точек между
               представлением и моделью (состоянием) приложения.
             </p>
-            <p>
+            <p className="card__answer">
               Плюсом является то, что лишь небольшая часть компонентов непосредственно влияет на состояние. Также легче
               проследить поток изменения состояния в жизненном цикле react-приложения
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Как устроено наследование в JS? Расскажите о своем опыте реализации JS наследования
             без использования фреймворков.
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Наследование в JS построено через прототипы. У каждого объекта есть свой прототип - тоже объект, в который
               могут быть записаны свойства и методы. Суть прототипов в том, что когда мы создаем некий новый объект,
               те методы и свойства, которые записаны в его прототип, сразу будут доступны, даже если новый объект -
               пустой.
             </p>
-            <p>
+            <p className="card__answer">
               Соответственно, если какой-то подкласс должен унаследовать свойства и методы абстрактного родительского
               класса, это можно сделать через копирование прототипа родительского класса.
             </p>
@@ -125,33 +125,34 @@ export default class Level1Component extends React.Component {
               Vehicle.prototype.move = () => {console.log('I can move')};
 
               const Car = function () {...}
-              Car.prototype = Object.create(Vehicle.prototype); // для объектов Car будет доступен метод move
+              Car.prototype = Object.create(Vehicle.prototype);
+              // для объектов Car будет доступен метод move
             `}
             </pre>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Какие библиотеки можно использовать для написания тестов end-to-end во
             фронтенде? Расскажите о своем опыте тестирования веб-приложений.
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Для тестирования чаще всего используются библиотеки Mocha и Chai. На данный момент у меня нет опыта
               написания автотестов.
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Вам нужно реализовать форму для отправки данных на сервер, состоящую из
             нескольких шагов. В вашем распоряжении дизайн формы и статичная верстка, в
             которой не показано, как форма должна работать в динамике. Подробного
             описания, как должны вести себя различные поля в зависимости от действий
             пользователя, в требованиях к проекту нет. Ваши действия?
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Прежде всего, надо узнать, на какой адрес делать POST запрос при отправке формы. Далее надо подумать,
               какие поля могут быть обязательными для заполнения и в каких нужно вводить данные определенного типа.
               На основании этого добавить валидацию формы. Также желательно добавить сообщения для пользователя об
@@ -160,49 +161,50 @@ export default class Level1Component extends React.Component {
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Расскажите, какие инструменты помогают вам экономить время в процессе
             написания, проверки и отладки кода.
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Прежде всего, это сама IDE - я пользуюсь WebStorm. Далее в дело вступают линтеры (ESLint, Stylelint,
               editorconfig) и средства автоматизации сборки (в основном, я использую Gulp). Для отладки, например,
               использую devtools в браузере. Для ускорения написания разметки использую Emmet
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Какие ресурсы вы используете для развития в профессиональной сфере? Приведите
             несколько конкретных примеров (сайты, блоги и так далее).
             Какие ещё области знаний, кроме тех, что непосредственно относятся к работе,
             вам интересны?
           </div>
-          <div>
-            <p>
+          <div className="card__answer-container">
+            <p className="card__answer">
               Подписан на различные каналы и группы, которые освещают новости фронтенд-мира (например,
               группа "Веб-стандарты", канал "For Web" в Telegram. Читаю статьи на Хабре, Medium
             </p>
-            <p>
+            <p className="card__answer">
               В качестве справочника постоянно пользуюсь Mozilla Developers Network (MDN). Некоторое время назад
               часто решал задачки на Codewars.
             </p>
           </div>
         </article>
-        <article>
-          <div>
+        <article className="level-one__card card">
+          <div className="card__question-container">
             Расскажите нам немного о себе и предоставьте несколько ссылок на последние
             работы, выполненные вами.
           </div>
-          <div>
-            <p>
-              Подробнее обо мне можно узнать в <a href="https://ge11ert.github.io/">онлайн-версии резюме</a>
+          <div className="card__answer-container">
+            <p className="card__answer">
+              Подробнее обо мне можно узнать в <a href="https://ge11ert.github.io/" className="card__link">
+              онлайн-версии резюме</a>
             </p>
-            <p>
+            <p className="card__answer">
               Ссылки на выполненные работы находятся там же, в разделе
-              <a href="https://ge11ert.github.io/#works"> Мои работы</a>
+              <a href="https://ge11ert.github.io/#works" className="card__link"> Мои работы</a>
             </p>
           </div>
         </article>

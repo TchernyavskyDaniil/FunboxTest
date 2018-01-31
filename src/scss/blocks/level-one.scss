@@ -1,0 +1,24 @@
+.level-one {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  .level-one__title {
+    width: 50%;
+    margin: 0;
+    margin-bottom: 30px;
+    flex-grow: 1;
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  .level-one__back {
+    margin-bottom: 30px;
+  }
+
+  .level-one__card {
+    width: 100%;
+    margin-bottom: 50px;
+  }
+}

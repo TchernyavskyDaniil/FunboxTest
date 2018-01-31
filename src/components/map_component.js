@@ -37,7 +37,7 @@ class RoutesMap extends React.Component {
   }
 
   renderLine () {
-    if (Object.keys(this.state.placemarks).length > 1) {
+    if (Object.keys(this.state.placemarks).length >= 1) {
       return (
         <Polyline
           geometry={{coordinates: Object.values(this.state.placemarks)}}
@@ -52,8 +52,8 @@ class RoutesMap extends React.Component {
   render () {
     return (
       <YMaps>
-        <div>
-          <Map state={mapState}>
+        <div className="routes__map">
+          <Map state={mapState} width={500} heigt={400}>
             {this.renderPlacemarks()}
             {this.renderLine()}
           </Map>

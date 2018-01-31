@@ -1,0 +1,25 @@
+.start-page {
+  .start-page__header {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 40px;
+    line-height: 50px;
+    text-align: center;
+  }
+
+  .start-page__info {
+    margin: 0;
+    margin-bottom: 50px;
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .start-page__links-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .start-page__link:first-child {
+    margin-right: 30px;
+  }
+}

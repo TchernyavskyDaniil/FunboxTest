@@ -1,0 +1,32 @@
+.link-button {
+  padding: 10px 15px;
+  font-size: 20px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  transition: background-color 0.2s;
+
+  &--lev-1 {
+    border: 2px solid $green;
+
+    &:hover {
+      background-color: $green;
+    }
+
+    &:active {
+      color: white;
+    }
+  }
+
+
+  &--lev-2 {
+    border: 2px solid $orange;
+
+    &:hover {
+      background-color: $orange;
+    }
+
+    &:active {
+      color: white;
+    }
+  }
+}

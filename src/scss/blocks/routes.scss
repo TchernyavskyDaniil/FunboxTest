@@ -1,0 +1,50 @@
+.routes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .routes__title {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+
+  .routes__points-editor {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-right: 30px;
+  }
+
+  .routes__input {
+    margin-bottom: 20px;
+    padding: 7px 10px;
+    font-size: 18px;
+    line-height: 30px;
+  }
+
+  .routes__clear {
+    font-size: 16px;
+    text-transform: none;
+    background: none;
+  }
+
+  .routes__points-list {
+    margin: 0;
+    margin-top: 30px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .routes__point {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    font-size: 20px;
+    border-bottom: 1px solid #444444;
+  }
+
+  .routes__map {
+  }
+}

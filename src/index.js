@@ -8,6 +8,8 @@ import IndexComponent from './components/index_component';
 import Level1Component from './components/level1_component';
 import Level2Component from './components/level2_component';
 
+import './scss/index.scss';
+
 
 ReactDOM.render(
   <Provider store={store}>
