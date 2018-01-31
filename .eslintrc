@@ -1,0 +1,10 @@
+{
+  "extends": "react",
+  "rules": {
+    "indent": ["error", 2],
+    "object-curly-spacing": 0
+  },
+  "env": {
+    "browser": true
+  }
+}
