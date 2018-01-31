@@ -8,8 +8,8 @@ export default class IndexComponent extends React.Component {
         <h1 className="start-page__header">Выполненное тестовое задание для&nbsp;FunBox</h1>
         <p className="start-page__info">Для перехода к Level 1 или Level 2 нажмите соответствующую кнопку:</p>
         <div className="start-page__links-container">
-          <Link to="/level1" className="start-page__link link-button link-button--lev-1">Level I</Link>
-          <Link to="/level2" className="start-page__link link-button link-button--lev-2">Level II</Link>
+          <Link to="/FunboxTest/level1" className="start-page__link link-button link-button--lev-1">Level I</Link>
+          <Link to="/FunboxTest/level2" className="start-page__link link-button link-button--lev-2">Level II</Link>
         </div>
       </section>
     );

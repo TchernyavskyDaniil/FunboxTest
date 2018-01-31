@@ -15,8 +15,8 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route path="/level1" component={Level1Component}/>
-        <Route path="/level2" component={Level2Component}/>
+        <Route exact path="/FunboxTest/level1" component={Level1Component}/>
+        <Route path="/FunboxTest/level2" component={Level2Component}/>
         <Route path="/" component={IndexComponent}/>
       </Switch>
     </BrowserRouter>
