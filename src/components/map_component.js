@@ -2,45 +2,82 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {YMaps, Map, Placemark, Polyline} from 'react-yandex-maps';
 
-const mapState = {center: [55.755, 37.622], zoom: 12}; //55.755412, 37.621595
+const mapState = {center: [55.755, 37.622], zoom: 12};
 
 class RoutesMap extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
     this.state = {
-      placemarks: {}
+      placemarksCoords: {},
+      placemarkElements: {},
+      currentCenter: mapState.center
     };
   }
 
-  renderPlacemarks () {
-    const points = this.props.pointsList;
+  componentWillReceiveProps (nextProps) {
+    const {pointsList} = nextProps;
+    const {placemarkElements} = this.state;
+    const center = [...this.state.currentCenter];
+    console.log(pointsList, this.state.placemarkElements);
 
-    const placemarks = Object.values(points).map((point) => {
-      return (
+    if (Object.keys(this.props.pointsList).length > Object.keys(nextProps.pointsList).length) {
+      this.updatePlacemarks(this.props.pointsList, nextProps.pointsList);
+    }
+
+    if (Object.keys(pointsList).length === 0) {
+      this.setState({placemarkElements: {}});
+      return;
+    }
+
+    for (let pointid in pointsList) {
+      const point = pointsList[pointid];
+
+      if (this.state.placemarkElements.hasOwnProperty(pointid)) {
+        continue;
+      }
+
+      placemarkElements[point.id] = (
         <Placemark key={point.id}
-          geometry={{type: 'Point', coordinates: mapState.center}}
+          geometry={{type: 'Point', coordinates: center}}
           options={{preset: 'islands#blueCircleDotIcon', draggable: true}}
           properties={{hintContent: point.title}}
-          onGeometryChange={(event) => this.onGeometryChange(event, point.id)}
+          onDragEnd={(event) => this.onGeometryChange(event, point.id)}
         />
       );
-    });
+    }
 
-    return placemarks;
+    this.setState({placemarkElements});
+  }
+
+  updatePlacemarks (oldPoints, newPoints) {
+    const oldIds = Object.keys(oldPoints);
+    const newIds = Object.keys(newPoints);
+    const {placemarkElements, placemarksCoords} = this.state;
+
+    const additionalId = oldIds.filter((id) => {
+      return (!newIds.includes(id));
+    });
+    delete placemarkElements[additionalId];
+    delete placemarksCoords[additionalId];
+    this.setState({placemarkElements, placemarksCoords});
   }
 
   onGeometryChange ({originalEvent}, id) {
-    const placemarks = this.state.placemarks;
+    const placemarks = Object.assign({}, this.state.placemarksCoords);
 
     placemarks[id] = originalEvent.target.geometry.getCoordinates();
-    this.setState({placemarks});
+    this.setState({placemarksCoords: placemarks});
+  }
+
+  onActionEnd ({originalEvent}) {
+    this.setState({currentCenter: originalEvent.map.getCenter()});
   }
 
   renderLine () {
-    if (Object.keys(this.state.placemarks).length >= 1) {
+    if (Object.keys(this.state.placemarksCoords).length > 1) {
       return (
         <Polyline
-          geometry={{coordinates: Object.values(this.state.placemarks)}}
+          geometry={{coordinates: Object.values(this.state.placemarksCoords)}}
           options={{ strokeColor: '#000000', strokeWidth: 1, strokeOpacity: 0.7}}
         />
       );
@@ -53,8 +90,8 @@ class RoutesMap extends React.Component {
     return (
       <YMaps>
         <div className="routes__map">
-          <Map state={mapState} width={500} heigt={400}>
-            {this.renderPlacemarks()}
+          <Map state={mapState} width={500} heigt={400} onActionEnd={(event) => this.onActionEnd(event)}>
+            {Object.values(this.state.placemarkElements)}
             {this.renderLine()}
           </Map>
         </div>
