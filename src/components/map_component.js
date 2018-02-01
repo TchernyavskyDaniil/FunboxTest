@@ -43,6 +43,7 @@ class RoutesMap extends React.Component {
           onDragEnd={(event) => this.onGeometryChange(event, point.id)}
         />
       );
+      this.updateCoords(placemarkElements[point.id]);
     }
 
     this.setState({placemarkElements});
@@ -61,11 +62,18 @@ class RoutesMap extends React.Component {
     this.setState({placemarkElements, placemarksCoords});
   }
 
-  onGeometryChange ({originalEvent}, id) {
-    const placemarks = Object.assign({}, this.state.placemarksCoords);
+  updateCoords (placemark) {
+    const placemarksCoords = Object.assign({}, this.state.placemarksCoords);
 
-    placemarks[id] = originalEvent.target.geometry.getCoordinates();
-    this.setState({placemarksCoords: placemarks});
+    placemarksCoords[placemark.key] = placemark.props.geometry.coordinates;
+    this.setState({placemarksCoords});
+  }
+
+  onGeometryChange ({originalEvent}, id) {
+    const placemarksCoords = Object.assign({}, this.state.placemarksCoords);
+
+    placemarksCoords[id] = originalEvent.target.geometry.getCoordinates();
+    this.setState({placemarksCoords});
   }
 
   onActionEnd ({originalEvent}) {
@@ -73,7 +81,7 @@ class RoutesMap extends React.Component {
   }
 
   renderLine () {
-    if (Object.keys(this.state.placemarksCoords).length > 1) {
+    if (Object.keys(this.state.placemarksCoords).length >= 1) {
       return (
         <Polyline
           geometry={{coordinates: Object.values(this.state.placemarksCoords)}}
