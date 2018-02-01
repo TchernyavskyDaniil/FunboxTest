@@ -18,14 +18,13 @@ class RoutesMap extends React.Component {
     const {pointsList} = nextProps;
     const {placemarkElements} = this.state;
     const center = [...this.state.currentCenter];
-    console.log(pointsList, this.state.placemarkElements);
 
     if (Object.keys(this.props.pointsList).length > Object.keys(nextProps.pointsList).length) {
       this.updatePlacemarks(this.props.pointsList, nextProps.pointsList);
     }
 
     if (Object.keys(pointsList).length === 0) {
-      this.setState({placemarkElements: {}});
+      this.setState({placemarkElements: {}, placemarksCoords: {}});
       return;
     }
 
